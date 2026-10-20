@@ -379,6 +379,6 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for further solutions.
 ---
 
 
-## 22. License
+## 21. License
 
 Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
