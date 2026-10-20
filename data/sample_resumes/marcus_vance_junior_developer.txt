@@ -1,0 +1,26 @@
+MARCUS VANCE
+Austin, TX | marcus.vance@example.com | (555) 432-1098 | github.com/marcusvance
+
+OBJECTIVE
+Motivated Computer Science graduate seeking an entry-level Software Developer or Junior Data Analyst position to apply Python, SQL, and problem-solving skills to real-world software engineering challenges.
+
+SKILLS
+- Programming: Python, JavaScript, C++, HTML, CSS, SQL
+- Data Tools: Pandas, NumPy, SQLite
+- General: Git, GitHub, Linux, Communication, Problem Solving
+
+EDUCATION
+Bachelor of Science in Computer Science
+Texas State University | Graduated December 2023
+
+PROJECTS
+- Student Grade Tracker: Built a desktop app in Python using Tkinter and SQLite to store and analyze student GPA trends.
+- Portfolio Website: Designed a responsive personal site using HTML, CSS, and basic JavaScript.
+- Weather Dashboard: Fetched data from OpenWeather API using Python requests and rendered simple charts with Matplotlib.
+
+EXPERIENCE
+IT Support Intern | University Computing Center
+January 2023 – November 2023
+- Assisted students and faculty with software installation, network troubleshooting, and hardware diagnosis.
+- Wrote basic Python automation scripts to parse network log files and flag suspicious activity.
+- Provided helpful customer service and documented troubleshooting steps.

@@ -1,0 +1,23 @@
+Job Title: Senior DevOps & Cloud Infrastructure Engineer
+Company: SkyPulse Systems
+Location: Austin, TX / Remote
+
+Role Overview:
+SkyPulse Systems is seeking a dedicated DevOps & Cloud Infrastructure Engineer to manage our multi-cloud deployment ecosystem, streamline CI/CD delivery pipelines, and ensure 99.99% system reliability.
+
+Key Responsibilities:
+- Design, provision, and maintain resilient cloud infrastructure on AWS and Google Cloud Platform using Terraform.
+- Manage Kubernetes clusters (EKS / GKE), Helm charts, and container orchestration with Docker.
+- Automate CI/CD pipelines using GitHub Actions, GitLab CI, and Jenkins for zero-downtime releases.
+- Implement comprehensive monitoring, alerting, and observability dashboards using Prometheus and Grafana.
+- Enforce infrastructure security, IAM least-privilege policies, and compliance scanning.
+- Troubleshoot network latency, container crashes, and system bottlenecks under high traffic load.
+
+Requirements:
+- 3+ years in DevOps, SRE, or Cloud Infrastructure Engineering.
+- Deep expertise with AWS, Docker, Kubernetes, and Terraform.
+- Strong scripting skills in Python, Bash, or Shell scripting.
+- Hands-on experience with Linux administration, Nginx, and system networking.
+- Experience with Prometheus, Grafana, and centralized logging.
+- Strong knowledge of Git, GitHub, and agile workflow management.
+- Excellent communication, incident response, and cross-functional teamwork abilities.

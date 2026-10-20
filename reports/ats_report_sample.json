@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "report_title": "AI-Powered Resume-Job Description Compatibility Report",
+    "generated_at": "2026-10-20 23:47:27",
+    "candidate_name": "Candidate",
+    "job_title": "Target Position",
+    "engine_version": "1.0.0"
+  },
+  "scores": {
+    "overall_ats_score": 63.5,
+    "tier": "Moderate Match (Needs Optimization)",
+    "skill_coverage_score": 76.9,
+    "tfidf_similarity_score": 25.4,
+    "verb_impact_score": 100.0,
+    "section_completeness_score": 100.0
+  },
+  "skills_analysis": {
+    "total_required_skills": 39,
+    "matched_skills_count": 30,
+    "missing_skills_count": 9,
+    "matched_skills": [
+      "AWS",
+      "Agile",
+      "Artificial Intelligence",
+      "Chromadb",
+      "Ci/Cd",
+      "Computer Science",
+      "Data Science",
+      "Deep Learning",
+      "Docker",
+      "GIT",
+      "Github",
+      "Hugging Face",
+      "Kubernetes",
+      "LLM",
+      "Langchain",
+      "Machine Learning",
+      "Mlops",
+      "NLP",
+      "Numpy",
+      "Pandas",
+      "Pytest",
+      "Python",
+      "Pytorch",
+      "RAG",
+      "SQL",
+      "Scikit-Learn",
+      "Tensorflow",
+      "Transformers",
+      "Unit Testing",
+      "Vector Databases"
+    ],
+    "missing_skills": [
+      "Bigquery",
+      "Communication",
+      "Critical Thinking",
+      "Faiss",
+      "GCP",
+      "Pinecone",
+      "Problem Solving",
+      "Pyspark",
+      "Team Collaboration"
+    ],
+    "additional_candidate_skills": [
+      "Aws Certified",
+      "BASH",
+      "BERT",
+      "C",
+      "C++",
+      "Data Analysis",
+      "Feature Engineering",
+      "Github Actions",
+      "Lambda",
+      "Matplotlib",
+      "Microservices",
+      "Model Deployment",
+      "Scrum",
+      "Seaborn",
+      "Supervised Learning",
+      "System Design",
+      "Tableau",
+      "Xgboost"
+    ],
+    "missing_skills_by_priority": {
+      "high": [
+        "Faiss",
+        "Pinecone",
+        "Pyspark"
+      ],
+      "medium": [
+        "Bigquery",
+        "GCP"
+      ],
+      "low": [
+        "Communication",
+        "Critical Thinking",
+        "Problem Solving",
+        "Team Collaboration"
+      ]
+    }
+  },
+  "ats_health_metrics": {
+    "word_count": 421,
+    "length_status": "Optimal (ideal 1-2 page length for ATS readability)",
+    "strong_verbs_count": 12,
+    "strong_verbs_sample": [
+      "architected",
+      "automated",
+      "built",
+      "collaborated",
+      "deployed",
+      "designed",
+      "developed",
+      "engineered",
+      "optimized",
+      "spearheaded",
+      "supervised",
+      "trained"
+    ],
+    "weak_phrases_found": [],
+    "quantifiable_metrics_count": 11,
+    "quantifiable_metrics_sample": [
+      "35%",
+      "22%",
+      "45,000",
+      "94%",
+      "35%",
+      "$4,200",
+      "58%",
+      "92%",
+      "40%",
+      "89%"
+    ],
+    "sections_present": [
+      "Summary",
+      "Skills",
+      "Experience",
+      "Education",
+      "Projects",
+      "Certifications"
+    ],
+    "missing_critical_sections": []
+  },
+  "actionable_recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Keyword Optimization",
+      "title": "Integrate 3 High-Priority Role Keywords",
+      "description": "The job description heavily stresses skills that are missing from your resume: Faiss, Pinecone, Pyspark. Incorporate these into your Technical Skills section and demonstrate their practical application within your Professional Experience bullet points.",
+      "action": "Add Faiss, Pinecone, Pyspark to relevant project or experience descriptions."
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Competency Coverage",
+      "title": "Expand Tooling & Frameworks (Bigquery, GCP)",
+      "description": "Consider adding secondary technical competencies: Bigquery, GCP. ATS scanners filter for related tools, libraries, and frameworks during initial parsing.",
+      "action": "List Bigquery, GCP in your skills matrix or tooling stack."
+    },
+    {
+      "priority": "HIGH",
+      "category": "Vocabulary Alignment",
+      "title": "Align Industry Terminology with Job Description",
+      "description": "Overall text similarity is currently 25.4%. Review the job description's specific phrasing (e.g. 'cross-functional collaboration', 'production pipelines', 'high-throughput') and mirror their phrasing where truthful.",
+      "action": "Adopt the terminology used in the target job posting to pass ATS semantic screening."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+Job Title: Senior AI & Machine Learning Engineer / Data Scientist
+Company: Apex Innovations
+Location: San Francisco, CA / Remote
+
+Role Overview:
+Apex Innovations is seeking an experienced Senior AI & Machine Learning Engineer to design, train, and deploy enterprise AI solutions. You will be instrumental in building state-of-the-art Natural Language Processing (NLP), Large Language Model (LLM) applications, and production machine learning pipelines.
+
+Key Responsibilities:
+- Design, build, and deploy production-grade machine learning and deep learning models using Python, PyTorch, and Scikit-Learn.
+- Develop advanced Natural Language Processing (NLP) solutions including text classification, information extraction, and Retrieval-Augmented Generation (RAG) with vector databases.
+- Fine-tune and evaluate Large Language Models (LLMs) using modern frameworks such as Hugging Face, Transformers, and LangChain.
+- Implement robust MLOps, containerization with Docker and Kubernetes, and automated CI/CD deployment pipelines on AWS or GCP.
+- Collaborate with cross-functional teams including software engineers, product managers, and data engineers.
+- Write clean, maintainable, modular code supported by thorough unit testing and agile development methodologies.
+
+Required Qualifications & Skills:
+- 3+ years of professional experience in Machine Learning, Data Science, or AI engineering.
+- Deep hands-on proficiency in Python, SQL, Pandas, NumPy, and Scikit-Learn.
+- Demonstrated experience building deep learning systems with PyTorch or TensorFlow.
+- Strong practical knowledge of Natural Language Processing (NLP), LLMs, Transformers, and RAG architectures.
+- Experience with cloud platforms (AWS preferred, including SageMaker, S3, EC2).
+- Containerization and orchestration experience using Docker and Kubernetes.
+- Experience with Git, GitHub, CI/CD, and automated unit testing (Pytest).
+- Excellent communication, critical thinking, problem solving, and team collaboration skills.
+- Bachelor's or Master's degree in Computer Science, Artificial Intelligence, Data Science, or related STEM discipline.
+
+Nice to Have:
+- Knowledge of Vector Databases (ChromaDB, Pinecone, or FAISS).
+- Experience with PySpark or BigQuery for large-scale data processing.
+- Published research or open-source AI project contributions.

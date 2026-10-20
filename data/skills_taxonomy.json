@@ -1,0 +1,77 @@
+{
+  "categories": {
+    "Programming Languages": [
+      "python", "javascript", "typescript", "java", "c++", "c#", "c", "go", "golang", 
+      "rust", "ruby", "php", "swift", "kotlin", "scala", "r", "dart", "matlab", "shell", "bash", "powershell", "sql", "html", "css"
+    ],
+    "AI, ML & Data Science": [
+      "machine learning", "deep learning", "nlp", "natural language processing", "computer vision",
+      "large language models", "llm", "generative ai", "genai", "prompt engineering", "langchain",
+      "transformers", "hugging face", "pytorch", "tensorflow", "keras", "scikit-learn", "sklearn",
+      "pandas", "numpy", "scipy", "xgboost", "lightgbm", "catboost", "opencv", "spacy", "nltk",
+      "bert", "gpt", "rag", "retrieval augmented generation", "vector databases", "faiss", "chromadb",
+      "pinecone", "qdrant", "reinforcement learning", "supervised learning", "unsupervised learning",
+      "feature engineering", "model deployment", "mlops", "data analysis", "data visualization",
+      "matplotlib", "seaborn", "plotly", "bi tools", "tableau", "power bi", "dbt", "spark", "pyspark"
+    ],
+    "Web & App Frameworks": [
+      "react", "react.js", "next.js", "nextjs", "vue", "vue.js", "angular", "svelte", "node.js", "nodejs",
+      "express", "express.js", "django", "flask", "fastapi", "spring boot", "spring", "asp.net", ".net",
+      "laravel", "ruby on rails", "flutter", "react native", "tailwind", "tailwind css", "bootstrap",
+      "graphql", "rest api", "restful apis", "websockets", "microservices"
+    ],
+    "Cloud & DevOps": [
+      "aws", "amazon web services", "azure", "google cloud", "gcp", "docker", "kubernetes", "k8s",
+      "terraform", "ansible", "ci/cd", "continuous integration", "github actions", "gitlab ci",
+      "jenkins", "helm", "prometheus", "grafana", "linux", "nginx", "apache", "serverless", "lambda"
+    ],
+    "Databases & Storage": [
+      "postgresql", "postgres", "mysql", "mongodb", "sqlite", "redis", "elasticsearch", "cassandra",
+      "dynamodb", "snowflake", "bigquery", "redshift", "firebase", "firestore", "supabase", "neo4j",
+      "mariadb", "oracle db"
+    ],
+    "Software Engineering & Tools": [
+      "git", "github", "gitlab", "bitbucket", "jira", "confluence", "agile", "scrum", "kanban",
+      "unit testing", "test driven development", "tdd", "integration testing", "pytest", "jest",
+      "postman", "selenium", "cypress", "system design", "object oriented programming", "oop",
+      "design patterns", "data structures", "algorithms"
+    ],
+    "Soft Skills & Leadership": [
+      "problem solving", "communication", "team collaboration", "leadership", "critical thinking",
+      "project management", "time management", "adaptability", "stakeholder management", "mentorship",
+      "analytical skills", "cross-functional collaboration", "presentation skills", "conflict resolution"
+    ],
+    "Certifications & Education": [
+      "aws certified", "azure certified", "gcp professional", "pmp", "scrum master", "csm",
+      "cissp", "ceh", "b.tech", "b.e", "m.tech", "m.s", "computer science", "artificial intelligence", "data science"
+    ]
+  },
+  "aliases": {
+    "js": "javascript",
+    "ts": "typescript",
+    "py": "python",
+    "k8s": "kubernetes",
+    "tf": "tensorflow",
+    "reactjs": "react",
+    "react.js": "react",
+    "nextjs": "next.js",
+    "vuejs": "vue",
+    "vue.js": "vue",
+    "nodejs": "node.js",
+    "expressjs": "express",
+    "express.js": "express",
+    "postgres": "postgresql",
+    "sklearn": "scikit-learn",
+    "amazon web services": "aws",
+    "google cloud platform": "gcp",
+    "google cloud": "gcp",
+    "microsoft azure": "azure",
+    "natural language processing": "nlp",
+    "large language models": "llm",
+    "retrieval augmented generation": "rag",
+    "continuous integration": "ci/cd",
+    "ci/cd pipeline": "ci/cd",
+    "test driven development": "tdd",
+    "object oriented programming": "oop"
+  }
+}

@@ -1,0 +1,24 @@
+Job Title: Senior Full-Stack Software Engineer
+Company: CloudScale Technologies
+Location: New York, NY / Hybrid
+
+Role Overview:
+CloudScale Technologies is looking for a versatile Senior Full-Stack Software Engineer to build scalable, customer-facing web applications. You will be responsible for crafting responsive user interfaces, engineering resilient microservices, and optimizing database performance.
+
+Key Responsibilities:
+- Build and maintain modern web applications using React, Next.js, TypeScript, and Tailwind CSS.
+- Architect robust backend services and RESTful APIs using Node.js, Express, and Python.
+- Model and optimize relational and NoSQL databases including PostgreSQL and Redis.
+- Package applications into Docker containers and orchestrate microservices with Kubernetes.
+- Set up continuous integration and automated testing using GitHub Actions, Jest, and Cypress.
+- Mentor junior engineers, conduct code reviews, and drive agile engineering excellence.
+
+Requirements:
+- 4+ years of hands-on experience in full-stack software development.
+- Expert proficiency in TypeScript, JavaScript, HTML, CSS, React, and Next.js.
+- Strong backend experience with Node.js, Express, REST APIs, and GraphQL.
+- Strong proficiency with PostgreSQL, SQL queries, indexing, and Redis caching.
+- Solid experience with cloud infrastructure (AWS or GCP), Docker, and CI/CD pipelines.
+- Commitment to software engineering best practices: Git, automated unit testing, and agile/scrum.
+- Strong problem solving, analytical skills, and verbal communication.
+- Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience.

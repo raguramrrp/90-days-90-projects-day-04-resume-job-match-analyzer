@@ -1,0 +1,39 @@
+PRIYA PATEL
+New York, NY | priya.patel@example.com | (555) 987-6543 | linkedin.com/in/priyapatel-dev | github.com/priyapatel
+
+PROFESSIONAL SUMMARY
+Senior Full-Stack Software Engineer with 5 years of experience designing and scaling distributed web applications and cloud architectures. Proficient in TypeScript, React, Next.js, Node.js, Express, and PostgreSQL. Experienced in microservices architecture, Docker containerization, RESTful API design, and CI/CD pipelines. Passionate about responsive UI design, web performance optimization, and reliable software engineering.
+
+TECHNICAL SKILLS
+- Programming Languages: JavaScript, TypeScript, Python, SQL, HTML, CSS
+- Frontend Frameworks: React, Next.js, Redux, Tailwind CSS, Bootstrap
+- Backend & APIs: Node.js, Express, FastAPI, REST APIs, GraphQL, WebSockets, Microservices
+- Databases & Caching: PostgreSQL, MongoDB, Redis, Prisma ORM
+- Cloud & DevOps: AWS (EC2, S3, RDS), Docker, Kubernetes, CI/CD, GitHub Actions, Nginx
+- Software Engineering & Tools: Git, GitHub, Jest, Cypress, Unit Testing, Agile, Scrum, Jira
+
+PROFESSIONAL EXPERIENCE
+
+Senior Full-Stack Engineer | NexusCloud Solutions, New York, NY
+August 2021 – Present
+- Architected and delivered high-performance web applications using React, Next.js, and TypeScript, boosting core web vitals and reducing page load times by 48%.
+- Designed resilient backend microservices with Node.js, Express, and PostgreSQL handling over 2.5 million daily API transactions with 99.98% uptime.
+- Implemented real-time synchronization using WebSockets and Redis caching, cutting database read loads by 62%.
+- Led a pod of 5 engineers in Agile sprints, conducting rigorous code reviews, mentoring junior developers, and enforcing unit testing standards with Jest (achieved 88% test coverage).
+- Automated CI/CD deployment pipelines using Docker and GitHub Actions to deploy to AWS ECS environments.
+
+Full-Stack Developer | BrightWeb Media, Boston, MA
+July 2019 – July 2021
+- Developed interactive responsive web dashboards with React, Tailwind CSS, and RESTful APIs for enterprise marketing clients.
+- Migrated legacy monolithic services to containerized Docker services running on AWS, reducing deployment failure rates by 70%.
+- Integrated third-party payment gateways, authentication providers (OAuth2, JWT), and analytics tracking.
+- Resolved over 120 critical bugs and technical debt tickets, improving application reliability.
+
+EDUCATION
+Bachelor of Technology in Information Technology
+Boston University | Graduated May 2019
+Honors: Magna Cum Laude
+
+PROJECTS
+- Real-Time Collaborative Canvas: Built a multi-user collaborative whiteboard with Next.js, WebSockets, Redis, and Tailwind CSS.
+- E-Commerce Microservices Engine: Designed a distributed shop backend using Node.js, PostgreSQL, Docker, and Stripe integration.

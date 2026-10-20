@@ -1,0 +1,41 @@
+ALEX CHEN
+San Francisco, CA | alex.chen@example.com | (555) 234-5678 | linkedin.com/in/alexchen-ai | github.com/alexchen
+
+PROFESSIONAL SUMMARY
+Results-driven AI & Data Science Specialist with 4+ years of experience architecting and deploying end-to-end Machine Learning and Natural Language Processing (NLP) systems. Proven expertise in fine-tuning Large Language Models (LLMs), scikit-learn statistical pipelines, PyTorch deep learning architectures, and scalable cloud deployments on AWS. Spearheaded MLOps pipelines reducing model inference latency by 35% and boosting business forecasting precision by 22%.
+
+TECHNICAL SKILLS
+- Programming Languages: Python, SQL, C++, Bash
+- AI / Machine Learning: Machine Learning, Deep Learning, Natural Language Processing (NLP), Scikit-Learn, PyTorch, TensorFlow, Hugging Face, Transformers, LLM, LangChain, RAG, Feature Engineering, Supervised Learning, Unsupervised Learning
+- Data Analysis & Tools: Pandas, NumPy, Matplotlib, Seaborn, Tableau, Vector Databases, ChromaDB
+- Cloud & MLOps: AWS (EC2, S3, SageMaker, Lambda), Docker, Kubernetes, CI/CD, MLflow, Git, GitHub
+- Engineering Best Practices: Agile, Scrum, Unit Testing, Pytest, System Design, REST APIs, Microservices
+
+PROFESSIONAL EXPERIENCE
+
+Senior Machine Learning Engineer | DataSphere AI, San Francisco, CA
+June 2022 – Present
+- Architected and deployed an enterprise Retrieval-Augmented Generation (RAG) system utilizing LangChain, Hugging Face Transformers, and ChromaDB vector search, serving 45,000+ daily internal queries with 94% retrieval accuracy.
+- Engineered NLP classification pipelines using PyTorch and Scikit-Learn to categorize unstructured customer feedback across 12 distinct sentiment categories, saving 180 analyst hours monthly.
+- Optimized model deployment containers with Docker and Kubernetes on AWS SageMaker, decreasing latency by 35% and reducing infrastructure costs by $4,200 monthly.
+- Spearheaded team adoption of automated unit testing with Pytest and CI/CD via GitHub Actions, elevating codebase test coverage from 58% to 92%.
+
+Data Scientist | FinTech Innovations, Austin, TX
+July 2020 – May 2022
+- Developed predictive fraud detection models using XGBoost, Scikit-Learn, and Pandas on datasets exceeding 12 million transactions, achieving an ROC-AUC score of 0.94.
+- Designed automated feature engineering pipelines in Python and SQL, cutting data preparation cycle time by 40%.
+- Built interactive stakeholder dashboards with Tableau and Matplotlib to monitor real-time model drift and data quality metrics.
+- Collaborated cross-functionally with product managers, engineers, and risk officers to streamline compliance reporting.
+
+EDUCATION
+Bachelor of Science in Computer Science & Artificial Intelligence
+University of California, Berkeley | Graduated May 2020
+GPA: 3.85 / 4.0
+
+PROJECTS
+- Autonomous Resume-Job Matcher: Built an NLP engine using TF-IDF and Cosine Similarity in Python to compare candidate resumes against ATS criteria with 89% alignment precision.
+- Multimodal Sentiment Classifier: Trained custom BERT and ViT models on PyTorch achieving 91.2% accuracy on benchmark social media datasets.
+
+CERTIFICATIONS
+- AWS Certified Machine Learning - Specialty (2023)
+- Deep Learning Specialization - Coursera / DeepLearning.AI
