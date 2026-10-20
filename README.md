@@ -378,11 +378,6 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for further solutions.
 
 ---
 
-## 21. Relevant Technical Skills & Resume Keywords
-
-`Python`, `Natural Language Processing (NLP)`, `TF-IDF`, `Cosine Similarity`, `scikit-learn`, `Streamlit`, `Information Extraction`, `Document Parsing`, `pypdf`, `python-docx`, `Plotly`, `Pytest`, `CareerTech`, `Applicant Tracking Systems (ATS)`
-
----
 
 ## 22. License
 
