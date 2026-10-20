@@ -3,7 +3,6 @@ setlocal
 
 echo ======================================================================
 echo    Running Automated Test Suite - Resume-Job Match Analyzer
-echo    Day 4 - 90 Days 90 Projects Challenge
 echo ======================================================================
 echo.
 

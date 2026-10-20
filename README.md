@@ -1,5 +1,4 @@
 # AI-Powered Resume–Job Description Compatibility Analyzer
-### 90 Days – 90 Projects Challenge &bull; Day 4 / 90
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.42+-FF4B4B.svg)](https://streamlit.io/)
@@ -65,13 +64,17 @@ This project solves this by delivering an automated, explainable, and multi-fact
 
 ## 5. Screenshots
 
-### Interactive Streamlit Dashboard Overview
-![Streamlit Dashboard](screenshots/01_streamlit_dashboard_overview.png)
-*Figure 1: Streamlit dashboard interface showing document upload, benchmark presets, ATS score gauge, and domain radar chart.*
+### Workspace-First Step-by-Step UI Overview
+![Step-by-Step UI Overview](screenshots/01_streamlit_dashboard_overview.png)
+*Figure 1: Redesigned workspace-first dashboard showing compact sidebar, top toolbar actions (Presets, Settings, About), 4-stage workflow ribbon, and dual-pane document input.*
+
+### Active ATS Results Dashboard & Competency Radar
+![Results Dashboard](screenshots/03_results_dashboard_view.png)
+*Figure 2: Active results dashboard showing interactive Plotly score radial gauge, 4 KPI cards, Domain Skill Competency radar chart, and skill gap tabs.*
 
 ### Exported ATS Compatibility Scorecard Report
 ![ATS Scorecard Report](screenshots/02_ats_scorecard_report.png)
-*Figure 2: Standalone, publication-ready HTML scorecard report with detailed metrics, skills gap matrix, and recommendations.*
+*Figure 3: Standalone, publication-ready HTML scorecard report with detailed metrics, skills gap matrix, and recommendations.*
 
 *(To regenerate screenshots locally, run `.\.venv\Scripts\python scripts\capture_screenshots.py`)*
 
@@ -381,11 +384,6 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for further solutions.
 
 ---
 
-## 22. License & Attribution
+## 22. License
 
 Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
-
-**Author:** Raguram R  
-**GitHub:** [@raguramrrp](https://github.com/raguramrrp)  
-**Email:** raguramrrp@gmail.com  
-**Portfolio Challenge:** 90 Days – 90 Projects (Day 4)

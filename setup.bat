@@ -3,7 +3,6 @@ setlocal EnableDelayedExpansion
 
 echo ======================================================================
 echo    AI-Powered Resume-Job Match Analyzer - Environment Setup
-echo    Day 4 - 90 Days 90 Projects Challenge
 echo ======================================================================
 echo.
 

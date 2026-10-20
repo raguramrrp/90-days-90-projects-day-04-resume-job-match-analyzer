@@ -13,29 +13,35 @@ The browser will automatically open to `http://localhost:8501`.
 
 ---
 
-## 2. Document Input Methods
+## 2. Navigation & Secondary Tool Panels
 
-### A. Uploading Documents
-1. **Resume Input**: Under **"1. Candidate Resume"**, click the file uploader to select a file (`.pdf`, `.docx`, `.txt`, or `.md`).
-   - The parser will automatically extract, clean, and populate the text area.
-2. **Job Description Input**: Under **"2. Job Description"**, either upload a JD document or paste the text directly into the text box.
+In the redesigned workspace-first layout, secondary tools are accessible via the top action toolbar:
 
-### B. Benchmark Demo Presets
-If you want to immediately see how the system handles different candidate profiles, use the **Benchmark Demo Presets** dropdown in the sidebar:
-- **Preset 1 (Senior AI Engineer ~85–95%)**: Strong match with deep NLP, PyTorch, Scikit-Learn, and AWS skills.
-- **Preset 2 (Full-Stack Engineer vs AI JD ~50–65%)**: Moderate match demonstrating cross-discipline transition gaps.
-- **Preset 3 (Junior Dev vs DevOps JD <50%)**: Low match highlighting extensive missing prerequisites.
+- **⚡ Presets**: Opens the benchmark modal drawer to quickly load one of 3 realistic candidate-job pairings.
+- **⚙️ Settings**: Opens the ATS algorithm scoring settings to customize weights for Skill Overlap, TF-IDF Similarity, Action Verbs, and Sections.
+- **ℹ️ About**: Displays technology architecture, NLP algorithms, document parsing, and security/privacy principles.
+
+The left sidebar is kept compact and clean, displaying only challenge identity, real-time input status, and quick shortcuts.
 
 ---
 
-## 3. Customizing ATS Scoring Weights
-In the sidebar, expand **"⚙️ ATS Scoring Weights"** to adjust the relative importance of:
-- **Skill Keyword Overlap** (Default: 45%)
-- **TF-IDF Semantic Match** (Default: 35%)
-- **Action Verbs & Impact** (Default: 10%)
-- **Section Completeness** (Default: 10%)
+## 3. Step-by-Step Analysis Workflow
 
-If the total does not equal 100%, the application automatically normalizes the weights proportionally.
+### Step 1: Candidate Resume
+1. Drag and drop your resume file (`.pdf`, `.docx`, `.txt`, `.md`) or paste plain text into the editor.
+2. The parser automatically extracts text, validates file contents, and displays word count metrics.
+3. Edit the extracted text directly in the text area if you want to test adjustments in real-time.
+
+### Step 2: Target Job Description
+1. Paste the target job posting into the text area, or optionally upload a job description file (`.pdf`, `.docx`, `.txt`, `.md`).
+2. The character and word counters will update immediately.
+
+### Step 3: Review & Analyze
+1. Review the input readiness indicators (e.g., `✓ Resume Ready (480 words)` &bull; `✓ Job Description Ready (310 words)`).
+2. Click **🚀 Run Compatibility Analysis**.
+
+### Step 4: Results Dashboard
+Once executed, the results dashboard mounts smoothly below, featuring 4 comprehensive analysis tabs.
 
 ---
 

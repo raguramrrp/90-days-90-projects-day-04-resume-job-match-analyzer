@@ -7,8 +7,13 @@ and keyword importance weighting into a calibrated ATS match report.
 from __future__ import annotations
 
 from typing import Any, Dict, List, Set, Tuple
-from src.nlp_engine import compute_tf_idf_similarity, extract_top_keywords
-from src.skill_extractor import SkillExtractor
+
+try:
+    from src.nlp_engine import compute_tf_idf_similarity, extract_top_keywords
+    from src.skill_extractor import SkillExtractor
+except ImportError:
+    from nlp_engine import compute_tf_idf_similarity, extract_top_keywords
+    from skill_extractor import SkillExtractor
 
 
 class CompatibilityMatcher:

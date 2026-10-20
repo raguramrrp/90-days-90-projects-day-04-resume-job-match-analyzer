@@ -1,96 +1,244 @@
-"""AI-Powered Resume-Job Description Compatibility Analyzer.
+"""Resume-Job Description Compatibility Analyzer.
 
 Main Streamlit Application Dashboard.
-Day 4 — 90 Days 90 Projects Challenge.
+Workspace-First Step-by-Step Architecture.
 """
 
 from __future__ import annotations
 
 import os
+import sys
+
+# Ensure project root directory is always on sys.path regardless of execution directory
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import streamlit as st
 
-from src.parser import (
-    extract_text_from_file,
-    extract_contact_info,
-    extract_sections,
-    DocumentParseError
-)
-from src.nlp_engine import compute_vocabulary_overlap
-from src.skill_extractor import SkillExtractor
-from src.matcher import CompatibilityMatcher
-from src.ats_analyzer import ATSAnalyzer
-from src.report_generator import ReportGenerator
-from src.utils import (
-    create_score_gauge,
-    create_category_radar_chart,
-    create_keyword_comparison_bar,
-    load_sample_file
-)
+try:
+    from src.parser import (
+        extract_text_from_file,
+        extract_contact_info,
+        extract_sections,
+        DocumentParseError
+    )
+    from src.nlp_engine import compute_vocabulary_overlap
+    from src.skill_extractor import SkillExtractor
+    from src.matcher import CompatibilityMatcher
+    from src.ats_analyzer import ATSAnalyzer
+    from src.report_generator import ReportGenerator
+    from src.utils import (
+        create_score_gauge,
+        create_category_radar_chart,
+        create_keyword_comparison_bar,
+        load_sample_file
+    )
+except ImportError:
+    from parser import (
+        extract_text_from_file,
+        extract_contact_info,
+        extract_sections,
+        DocumentParseError
+    )
+    from nlp_engine import compute_vocabulary_overlap
+    from skill_extractor import SkillExtractor
+    from matcher import CompatibilityMatcher
+    from ats_analyzer import ATSAnalyzer
+    from report_generator import ReportGenerator
+    from utils import (
+        create_score_gauge,
+        create_category_radar_chart,
+        create_keyword_comparison_bar,
+        load_sample_file
+    )
 
 # Page configuration
 st.set_page_config(
-    page_title="AI Resume–Job Compatibility Analyzer",
+    page_title="Resume–Job Match Analyzer",
     page_icon="📄",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling
+# Enterprise SaaS Design System Styling
 st.markdown("""
 <style>
-    .main-title {
-        font-size: 2.2rem;
+    /* Base typography and background */
+    .stApp {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    /* Top Navigation Header */
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 1.5rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .header-title {
+        font-size: 1.75rem;
         font-weight: 800;
         color: #0f172a;
-        margin-bottom: 0.2rem;
+        margin: 0;
         letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
     }
-    .subtitle {
-        font-size: 1.05rem;
+    .header-subtitle {
+        font-size: 0.95rem;
+        color: #64748b;
+        margin-top: 0.2rem;
+    }
+    
+    /* Workflow Stage Cards */
+    .stage-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    .stage-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .stage-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .stage-badge {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        background: #f1f5f9;
         color: #475569;
+    }
+    .stage-badge-success {
+        background: #ecfdf5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+    }
+    
+    /* Workflow Step Progression Ribbon */
+    .step-ribbon {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
         margin-bottom: 1.5rem;
     }
-    .badge {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        margin-right: 6px;
+    .step-pill {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.6rem 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #64748b;
     }
-    .kpi-box {
-        background-color: #f8fafc;
+    .step-pill.active {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+    .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #e2e8f0;
+        color: #475569;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+    .step-pill.active .step-num {
+        background: #2563eb;
+        color: #ffffff;
+    }
+
+    /* KPI Metric Cards */
+    .kpi-card {
+        background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 10px;
-        padding: 16px;
+        padding: 1.1rem;
         text-align: center;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     }
     .kpi-title {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         color: #64748b;
         font-weight: 600;
         text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .kpi-metric {
-        font-size: 1.9rem;
+    .kpi-val {
+        font-size: 1.85rem;
         font-weight: 800;
         color: #0f172a;
-        margin-top: 4px;
+        margin: 0.35rem 0 0.2rem 0;
     }
+    .kpi-sub {
+        font-size: 0.78rem;
+        color: #64748b;
+    }
+    
+    /* Skill Pills */
     .skill-pill {
         display: inline-block;
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 0.82rem;
         font-weight: 600;
-        margin: 2px 4px 2px 0;
+        margin: 2px 4px 3px 0;
     }
+    
+    /* Recommendation Card */
     .rec-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 14px 18px;
-        margin-bottom: 12px;
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.85rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Empty state card */
+    .empty-card {
+        background: #ffffff;
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 3rem 2rem;
+        text-align: center;
+        color: #64748b;
+        margin-top: 1rem;
+    }
+    .empty-icon {
+        font-size: 2.8rem;
+        margin-bottom: 0.8rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -109,142 +257,512 @@ def get_services():
 skill_extractor, matcher, ats_analyzer = get_services()
 
 
-# --- SIDEBAR ---
-with st.sidebar:
-    st.markdown("### 🏆 90 Days 90 Projects")
-    st.markdown("**Day 4:** Resume–Job Match Analyzer")
-    st.caption("AI/NLP CareerTech Portfolio Project")
+# --- SESSION STATE INITIALIZATION ---
+if "resume_text" not in st.session_state:
+    st.session_state.resume_text = ""
+if "ta_resume" not in st.session_state:
+    st.session_state.ta_resume = ""
+if "jd_text" not in st.session_state:
+    st.session_state.jd_text = ""
+if "ta_jd" not in st.session_state:
+    st.session_state.ta_jd = ""
+if "resume_filename" not in st.session_state:
+    st.session_state.resume_filename = ""
+if "jd_filename" not in st.session_state:
+    st.session_state.jd_filename = ""
+if "analysis_done" not in st.session_state:
+    st.session_state.analysis_done = False
+if "w_skills" not in st.session_state:
+    st.session_state.w_skills = 45
+if "w_tfidf" not in st.session_state:
+    st.session_state.w_tfidf = 35
+if "w_impact" not in st.session_state:
+    st.session_state.w_impact = 10
+if "w_sections" not in st.session_state:
+    st.session_state.w_sections = 10
+if "active_preset_name" not in st.session_state:
+    st.session_state.active_preset_name = ""
+if "_last_resume_file_id" not in st.session_state:
+    st.session_state._last_resume_file_id = None
+if "_last_jd_file_id" not in st.session_state:
+    st.session_state._last_jd_file_id = None
+
+# Support URL query parameter for automated demo/screenshot initialization (?preset=1/2/3)
+query_preset = st.query_params.get("preset")
+if query_preset and not st.session_state.resume_text:
+    if query_preset == "1":
+        loaded_res = load_sample_file("data/sample_resumes/alex_chen_data_scientist.txt")
+        loaded_jd = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
+        st.session_state.resume_text = loaded_res
+        st.session_state.ta_resume = loaded_res
+        st.session_state.jd_text = loaded_jd
+        st.session_state.ta_jd = loaded_jd
+        st.session_state.resume_filename = "alex_chen_data_scientist.txt (Preset 1)"
+        st.session_state.jd_filename = "ai_data_scientist_job_description.txt"
+        st.session_state.active_preset_name = "Senior AI Engineer (High Match)"
+        st.session_state.analysis_done = True
+    elif query_preset == "2":
+        loaded_res = load_sample_file("data/sample_resumes/priya_patel_fullstack_dev.txt")
+        loaded_jd = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
+        st.session_state.resume_text = loaded_res
+        st.session_state.ta_resume = loaded_res
+        st.session_state.jd_text = loaded_jd
+        st.session_state.ta_jd = loaded_jd
+        st.session_state.resume_filename = "priya_patel_fullstack_dev.txt (Preset 2)"
+        st.session_state.jd_filename = "ai_data_scientist_job_description.txt"
+        st.session_state.active_preset_name = "Full-Stack Dev vs AI JD (Moderate)"
+        st.session_state.analysis_done = True
+    elif query_preset == "3":
+        loaded_res = load_sample_file("data/sample_resumes/marcus_vance_junior_developer.txt")
+        loaded_jd = load_sample_file("data/sample_jds/devops_cloud_engineer_job_description.txt")
+        st.session_state.resume_text = loaded_res
+        st.session_state.ta_resume = loaded_res
+        st.session_state.jd_text = loaded_jd
+        st.session_state.ta_jd = loaded_jd
+        st.session_state.resume_filename = "marcus_vance_junior_developer.txt (Preset 3)"
+        st.session_state.jd_filename = "devops_cloud_engineer_job_description.txt"
+        st.session_state.active_preset_name = "Junior Dev vs DevOps JD (Low Match)"
+        st.session_state.analysis_done = True
+
+
+# --- DEDICATED DIALOGS (SECONDARY PANELS) ---
+
+@st.dialog("⚡ Benchmark Demo Presets")
+def open_presets_dialog():
+    """Modal drawer for selecting and loading benchmark profiles."""
+    st.markdown(
+        "Select a pre-configured candidate resume and target job description to immediately test the "
+        "matching engine across different career scenarios:"
+    )
     st.markdown("---")
 
-    st.markdown("### ⚡ Benchmark Demo Presets")
-    st.caption("Click a preset below to instantly load candidate resumes and job descriptions:")
+    # Preset 1
+    p1_col1, p1_col2 = st.columns([3, 1])
+    with p1_col1:
+        st.markdown("**1. Senior AI & Machine Learning Engineer**")
+        st.caption("Target: Apex Innovations AI Engineer JD &bull; Candidate: Alex Chen (~85–95% High Match)")
+    with p1_col2:
+        if st.button("Load Preset 1", key="btn_p1", use_container_width=True):
+            p1_res = load_sample_file("data/sample_resumes/alex_chen_data_scientist.txt")
+            p1_jd = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
+            st.session_state.resume_text = p1_res
+            st.session_state.ta_resume = p1_res
+            st.session_state.jd_text = p1_jd
+            st.session_state.ta_jd = p1_jd
+            st.session_state.resume_filename = "alex_chen_data_scientist.txt (Preset 1)"
+            st.session_state.jd_filename = "ai_data_scientist_job_description.txt"
+            st.session_state.active_preset_name = "Senior AI Engineer (High Match)"
+            st.session_state._last_resume_file_id = None
+            st.session_state._last_jd_file_id = None
+            st.session_state.analysis_done = False
+            st.rerun()
+
+    st.markdown("---")
+
+    # Preset 2
+    p2_col1, p2_col2 = st.columns([3, 1])
+    with p2_col1:
+        st.markdown("**2. Full-Stack Engineer vs AI JD (Role Switch)**")
+        st.caption("Target: Apex Innovations AI Engineer JD &bull; Candidate: Priya Patel (~50–65% Moderate Match)")
+    with p2_col2:
+        if st.button("Load Preset 2", key="btn_p2", use_container_width=True):
+            p2_res = load_sample_file("data/sample_resumes/priya_patel_fullstack_dev.txt")
+            p2_jd = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
+            st.session_state.resume_text = p2_res
+            st.session_state.ta_resume = p2_res
+            st.session_state.jd_text = p2_jd
+            st.session_state.ta_jd = p2_jd
+            st.session_state.resume_filename = "priya_patel_fullstack_dev.txt (Preset 2)"
+            st.session_state.jd_filename = "ai_data_scientist_job_description.txt"
+            st.session_state.active_preset_name = "Full-Stack Dev vs AI JD (Moderate)"
+            st.session_state._last_resume_file_id = None
+            st.session_state._last_jd_file_id = None
+            st.session_state.analysis_done = False
+            st.rerun()
+
+    st.markdown("---")
+
+    # Preset 3
+    p3_col1, p3_col2 = st.columns([3, 1])
+    with p3_col1:
+        st.markdown("**3. Junior Developer vs Senior Cloud DevOps JD**")
+        st.caption("Target: SkyPulse Systems DevOps JD &bull; Candidate: Marcus Vance (<50% Gap Analysis)")
+    with p3_col2:
+        if st.button("Load Preset 3", key="btn_p3", use_container_width=True):
+            p3_res = load_sample_file("data/sample_resumes/marcus_vance_junior_developer.txt")
+            p3_jd = load_sample_file("data/sample_jds/devops_cloud_engineer_job_description.txt")
+            st.session_state.resume_text = p3_res
+            st.session_state.ta_resume = p3_res
+            st.session_state.jd_text = p3_jd
+            st.session_state.ta_jd = p3_jd
+            st.session_state.resume_filename = "marcus_vance_junior_developer.txt (Preset 3)"
+            st.session_state.jd_filename = "devops_cloud_engineer_job_description.txt"
+            st.session_state.active_preset_name = "Junior Dev vs DevOps JD (Low Match)"
+            st.session_state._last_resume_file_id = None
+            st.session_state._last_jd_file_id = None
+            st.session_state.analysis_done = False
+            st.rerun()
+
+    st.markdown("---")
+    c_close, c_clear = st.columns(2)
+    with c_clear:
+        if st.button("🔄 Clear Workspace", key="btn_clear_presets", use_container_width=True):
+            st.session_state.resume_text = ""
+            st.session_state.ta_resume = ""
+            st.session_state.jd_text = ""
+            st.session_state.ta_jd = ""
+            st.session_state.resume_filename = ""
+            st.session_state.jd_filename = ""
+            st.session_state.active_preset_name = ""
+            st.session_state._last_resume_file_id = None
+            st.session_state._last_jd_file_id = None
+            st.session_state.analysis_done = False
+            st.rerun()
+
+
+@st.dialog("⚙️ ATS Scoring Weights & Algorithm Settings")
+def open_settings_dialog():
+    """Modal drawer for tuning multi-factor ATS scoring algorithm weights."""
+    st.markdown(
+        "Customize the relative influence of each dimension in the composite ATS compatibility calculation. "
+        "Weights are dynamically normalized to 100%:"
+    )
     
-    preset = st.selectbox(
-        "Choose a test profile:",
-        [
-            "Select custom or preset...",
-            "Preset 1: Senior AI Engineer (High Match ~85-95%)",
-            "Preset 2: Full-Stack Engineer vs AI JD (Moderate ~50-65%)",
-            "Preset 3: Junior Dev vs Cloud DevOps JD (Gap Analysis <50%)"
-        ],
-        index=0
+    new_skills = st.slider(
+        "Skill Keyword Overlap", 
+        min_value=10, max_value=70, 
+        value=st.session_state.w_skills, step=5,
+        help="Weight assigned to exact and canonical skill matches from the 1,200+ skill taxonomy."
+    )
+    new_tfidf = st.slider(
+        "TF-IDF Semantic Similarity", 
+        min_value=10, max_value=70, 
+        value=st.session_state.w_tfidf, step=5,
+        help="Weight assigned to document-wide unigram/bigram cosine similarity."
+    )
+    new_impact = st.slider(
+        "Action Verbs & Measurable Impact", 
+        min_value=0, max_value=30, 
+        value=st.session_state.w_impact, step=5,
+        help="Weight assigned to strong power verbs and quantified metric bullets (%, $, scale)."
+    )
+    new_sections = st.slider(
+        "Section Completeness", 
+        min_value=0, max_value=30, 
+        value=st.session_state.w_sections, step=5,
+        help="Weight assigned to structural resume headings (Experience, Skills, Education, etc.)."
     )
 
-    st.markdown("---")
-    st.markdown("### ⚙️ ATS Scoring Weights")
-    with st.expander("Customize Algorithm Weights", expanded=False):
-        w_skills = st.slider("Skill Keyword Overlap", 10, 70, 45, 5, help="Weight for exact and canonical skills coverage")
-        w_tfidf = st.slider("TF-IDF Semantic Match", 10, 70, 35, 5, help="Weight for document-wide n-gram text similarity")
-        w_impact = st.slider("Action Verbs & Impact", 0, 30, 10, 5, help="Weight for quantified metrics and power verbs")
-        w_sections = st.slider("Section Completeness", 0, 30, 10, 5, help="Weight for standard ATS structural headings")
-        
-        total_w = w_skills + w_tfidf + w_impact + w_sections
-        if total_w != 100:
-            st.warning(f"Total weight is {total_w}%. Normalizing to 100%.")
+    tot = new_skills + new_tfidf + new_impact + new_sections
+    if tot != 100:
+        st.info(f"Total weight sum: {tot}%. The algorithm will normalize these proportions to 100%.")
+    else:
+        st.success("Total weights perfectly equal 100%.")
 
     st.markdown("---")
-    st.markdown("### 📖 About the Technology")
-    st.caption(
-        "Built using **scikit-learn** TF-IDF vectorization, cosine similarity, "
-        "and a multi-word taxonomy matching engine. Parses PDF, DOCX, and TXT documents."
+    col_save, col_reset = st.columns(2)
+    with col_save:
+        if st.button("💾 Apply & Save Settings", key="btn_save_weights", type="primary", use_container_width=True):
+            st.session_state.w_skills = new_skills
+            st.session_state.w_tfidf = new_tfidf
+            st.session_state.w_impact = new_impact
+            st.session_state.w_sections = new_sections
+            st.rerun()
+    with col_reset:
+        if st.button("↺ Reset to Defaults (45/35/10/10)", key="btn_reset_weights", use_container_width=True):
+            st.session_state.w_skills = 45
+            st.session_state.w_tfidf = 35
+            st.session_state.w_impact = 10
+            st.session_state.w_sections = 10
+            st.rerun()
+
+
+# Dynamic Word Counts
+current_res_words = len(st.session_state.get("resume_text", "").split())
+current_jd_words = len(st.session_state.get("jd_text", "").split())
+
+
+# --- CLEAN MINIMAL SIDEBAR ---
+with st.sidebar:
+    st.markdown("### 📄 Resume Matcher")
+    st.caption("ATS Compatibility & Keyword Optimizer")
+    st.markdown("---")
+
+    st.markdown("#### 📌 Workspace Status")
+    if current_res_words > 0:
+        st.markdown(f"**Resume:** <span style='color:#059669; font-weight:600;'>✓ Ready ({current_res_words} words)</span>", unsafe_allow_html=True)
+    else:
+        st.markdown("**Resume:** <span style='color:#94a3b8;'>⚪ Awaiting input</span>", unsafe_allow_html=True)
+
+    if current_jd_words > 0:
+        st.markdown(f"**Job Description:** <span style='color:#059669; font-weight:600;'>✓ Ready ({current_jd_words} words)</span>", unsafe_allow_html=True)
+    else:
+        st.markdown("**Job Description:** <span style='color:#94a3b8;'>⚪ Awaiting input</span>", unsafe_allow_html=True)
+
+    if st.session_state.analysis_done:
+        st.markdown("**ATS Status:** <span style='color:#2563eb; font-weight:600;'>🟢 Analysis Complete</span>", unsafe_allow_html=True)
+    else:
+        st.markdown("**ATS Status:** <span style='color:#94a3b8;'>⚪ Not Run</span>", unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("#### ⚡ Quick Actions")
+    if st.button("⚡ Demo Presets", key="sb_btn_presets", use_container_width=True):
+        open_presets_dialog()
+    if st.button("⚙️ ATS Weights", key="sb_btn_settings", use_container_width=True):
+        open_settings_dialog()
+    if st.button("🔄 Reset Workspace", key="sb_btn_reset", use_container_width=True):
+        st.session_state.resume_text = ""
+        st.session_state.ta_resume = ""
+        st.session_state.jd_text = ""
+        st.session_state.ta_jd = ""
+        st.session_state.resume_filename = ""
+        st.session_state.jd_filename = ""
+        st.session_state.active_preset_name = ""
+        st.session_state._last_resume_file_id = None
+        st.session_state._last_jd_file_id = None
+        st.session_state.analysis_done = False
+        st.rerun()
+
+
+# --- TOP MAIN WORKSPACE TOOLBAR ---
+tb_col_info, tb_col_actions = st.columns([2.0, 1.0])
+
+with tb_col_info:
+    st.markdown(
+        "<div class='header-title'>📄 Resume–Job Match Analyzer</div>"
+        "<div class='header-subtitle'>Enterprise ATS Compatibility & Keyword Gap Optimization Engine</div>",
+        unsafe_allow_html=True
     )
 
+with tb_col_actions:
+    st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+    a1, a2 = st.columns(2)
+    with a1:
+        if st.button("⚡ Presets", key="top_btn_presets", use_container_width=True, help="Load pre-configured benchmark profiles"):
+            open_presets_dialog()
+    with a2:
+        if st.button("⚙️ Settings", key="top_btn_settings", use_container_width=True, help="Configure ATS scoring algorithm weights"):
+            open_settings_dialog()
 
-# --- MAIN HEADER ---
-st.markdown("<div class='main-title'>📄 AI-Powered Resume–Job Compatibility Analyzer</div>", unsafe_allow_html=True)
-st.markdown(
-    "<div class='subtitle'>Evaluate resume compatibility against any job description, uncover critical skill gaps, "
-    "audit ATS compliance, and receive prioritized recommendations.</div>",
-    unsafe_allow_html=True
-)
+st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
 
-# Preset data resolution
-resume_default_text = ""
-jd_default_text = ""
+# Step progression ribbon
+step1_active = "active" if not st.session_state.analysis_done else ""
+step2_active = "active" if not st.session_state.analysis_done else ""
+step3_active = "active" if not st.session_state.analysis_done and (current_res_words > 0 and current_jd_words > 0) else ""
+step4_active = "active" if st.session_state.analysis_done else ""
 
-if preset == "Preset 1: Senior AI Engineer (High Match ~85-95%)":
-    resume_default_text = load_sample_file("data/sample_resumes/alex_chen_data_scientist.txt")
-    jd_default_text = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
-elif preset == "Preset 2: Full-Stack Engineer vs AI JD (Moderate ~50-65%)":
-    resume_default_text = load_sample_file("data/sample_resumes/priya_patel_fullstack_dev.txt")
-    jd_default_text = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
-elif preset == "Preset 3: Junior Dev vs Cloud DevOps JD (Gap Analysis <50%)":
-    resume_default_text = load_sample_file("data/sample_resumes/marcus_vance_junior_developer.txt")
-    jd_default_text = load_sample_file("data/sample_jds/devops_cloud_engineer_job_description.txt")
+st.markdown(f"""
+<div class='step-ribbon'>
+    <div class='step-pill {step1_active}'>
+        <span class='step-num'>1</span> Candidate Resume
+    </div>
+    <div class='step-pill {step2_active}'>
+        <span class='step-num'>2</span> Job Description
+    </div>
+    <div class='step-pill {step3_active}'>
+        <span class='step-num'>3</span> Review & Analyze
+    </div>
+    <div class='step-pill {step4_active}'>
+        <span class='step-num'>4</span> Results Dashboard
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 
-# --- INPUT INTERFACE ---
-col_res, col_jd = st.columns(2)
+# --- WORKSPACE STEP-BY-STEP WORKFLOW ---
+col_step1, col_step2 = st.columns(2)
 
-with col_res:
-    st.markdown("#### 1. Candidate Resume")
+# === STEP 1: CANDIDATE RESUME ===
+with col_step1:
+    res_badge = (
+        f"<span class='stage-badge stage-badge-success'>✓ {current_res_words} words</span>" 
+        if current_res_words > 0 else "<span class='stage-badge'>Required</span>"
+    )
+    st.markdown(
+        f"""<div class='stage-header'>
+            <div class='stage-title'><span>📄</span> Step 1: Candidate Resume</div>
+            {res_badge}
+        </div>""",
+        unsafe_allow_html=True
+    )
+    
     resume_file = st.file_uploader(
-        "Upload Resume (.pdf, .docx, .txt)",
+        "Upload Resume (.pdf, .docx, .txt, .md)",
         type=["pdf", "docx", "txt", "md"],
+        key="uploader_resume",
         help="Upload candidate resume in PDF, Word DOCX, or Plain Text format"
     )
     
-    extracted_resume_text = ""
     if resume_file is not None:
-        try:
-            extracted_resume_text = extract_text_from_file(resume_file.read(), resume_file.name)
-            st.success(f"Successfully extracted text from '{resume_file.name}' ({len(extracted_resume_text.split())} words)")
-        except DocumentParseError as e:
-            st.error(f"Error parsing resume: {e}")
+        file_id = f"{resume_file.name}_{resume_file.size}"
+        if st.session_state.get("_last_resume_file_id") != file_id:
+            try:
+                parsed_text = extract_text_from_file(resume_file.read(), resume_file.name)
+                st.session_state._last_resume_file_id = file_id
+                st.session_state.resume_text = parsed_text
+                st.session_state.ta_resume = parsed_text
+                st.session_state.resume_filename = resume_file.name
+                st.session_state.analysis_done = False
+                st.rerun()
+            except DocumentParseError as e:
+                st.error(f"Parse error: {e}")
 
     # Editable text area
-    initial_resume_val = extracted_resume_text or resume_default_text
-    resume_text = st.text_area(
-        "Or edit / paste Resume content:",
-        value=initial_resume_val,
-        height=260,
-        placeholder="Paste plain text resume here or use the file uploader above..."
-    )
+    def on_resume_edited():
+        st.session_state.resume_text = st.session_state.ta_resume
 
-with col_jd:
-    st.markdown("#### 2. Job Description")
-    jd_file = st.file_uploader(
-        "Upload Job Description (Optional)",
-        type=["pdf", "docx", "txt", "md"],
-        help="Upload JD file or paste text directly into the box below"
+    st.text_area(
+        "Resume Content (Editable):",
+        height=240,
+        key="ta_resume",
+        on_change=on_resume_edited,
+        placeholder="Upload a document above or paste plain text resume here...",
+        help="Edit resume text directly. Changes are automatically preserved."
+    )
+    # Sync in case value was modified directly
+    st.session_state.resume_text = st.session_state.get("ta_resume", "")
+
+
+# === STEP 2: JOB DESCRIPTION ===
+with col_step2:
+    jd_badge = (
+        f"<span class='stage-badge stage-badge-success'>✓ {current_jd_words} words</span>" 
+        if current_jd_words > 0 else "<span class='stage-badge'>Required</span>"
+    )
+    st.markdown(
+        f"""<div class='stage-header'>
+            <div class='stage-title'><span>🎯</span> Step 2: Target Job Description</div>
+            {jd_badge}
+        </div>""",
+        unsafe_allow_html=True
     )
     
-    extracted_jd_text = ""
-    if jd_file is not None:
-        try:
-            extracted_jd_text = extract_text_from_file(jd_file.read(), jd_file.name)
-            st.success(f"Successfully extracted text from '{jd_file.name}' ({len(extracted_jd_text.split())} words)")
-        except DocumentParseError as e:
-            st.error(f"Error parsing job description: {e}")
-
-    initial_jd_val = extracted_jd_text or jd_default_text
-    jd_text = st.text_area(
-        "Or edit / paste Job Description:",
-        value=initial_jd_val,
-        height=260,
-        placeholder="Paste full job description, requirements, and responsibilities here..."
+    jd_file = st.file_uploader(
+        "Upload Job Description Document (Optional)",
+        type=["pdf", "docx", "txt", "md"],
+        key="uploader_jd",
+        help="Optional: Upload job description file or paste text directly below"
     )
+    
+    if jd_file is not None:
+        file_id = f"{jd_file.name}_{jd_file.size}"
+        if st.session_state.get("_last_jd_file_id") != file_id:
+            try:
+                parsed_jd = extract_text_from_file(jd_file.read(), jd_file.name)
+                st.session_state._last_jd_file_id = file_id
+                st.session_state.jd_text = parsed_jd
+                st.session_state.ta_jd = parsed_jd
+                st.session_state.jd_filename = jd_file.name
+                st.session_state.analysis_done = False
+                st.rerun()
+            except DocumentParseError as e:
+                st.error(f"Parse error: {e}")
 
-# Action button
-analyze_clicked = st.button("🚀 Run Compatibility Analysis", type="primary", use_container_width=True)
+    # Editable text area
+    def on_jd_edited():
+        st.session_state.jd_text = st.session_state.ta_jd
 
-# Preserve state
-if "analysis_done" not in st.session_state:
-    st.session_state.analysis_done = False
-
-if analyze_clicked:
-    if not resume_text.strip():
-        st.error("Please provide a resume by uploading a document or pasting text.")
-    elif not jd_text.strip():
-        st.error("Please provide a job description by uploading a document or pasting text.")
-    else:
-        st.session_state.analysis_done = True
-        st.session_state.resume_text = resume_text
-        st.session_state.jd_text = jd_text
+    st.text_area(
+        "Job Description Content (Editable):",
+        height=240,
+        key="ta_jd",
+        on_change=on_jd_edited,
+        placeholder="Paste full job description requirements and responsibilities here...",
+        help="Edit job description text directly. Changes are automatically preserved."
+    )
+    # Sync in case value was modified directly
+    st.session_state.jd_text = st.session_state.get("ta_jd", "")
 
 
-# --- RESULTS DISPLAY ---
-if st.session_state.analysis_done and "resume_text" in st.session_state:
+# Re-evaluate live word counts after text areas render
+live_res_words = len(st.session_state.get("resume_text", "").split())
+live_jd_words = len(st.session_state.get("jd_text", "").split())
+
+
+# === STEP 3: REVIEW & ANALYZE ===
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.container():
+    st.markdown(
+        """<div class='stage-header' style='margin-bottom:0.5rem;'>
+            <div class='stage-title'><span>⚡</span> Step 3: Review Inputs & Run Compatibility Engine</div>
+        </div>""",
+        unsafe_allow_html=True
+    )
+    
+    col_rev_stat, col_rev_btn = st.columns([2.2, 1.2])
+
+    with col_rev_stat:
+        res_ready = live_res_words > 0
+        jd_ready = live_jd_words > 0
+        
+        stat_chips = []
+        if res_ready:
+            stat_chips.append(f"<span style='color:#059669; font-weight:600;'>✓ Resume Ready ({live_res_words} words)</span>")
+        else:
+            stat_chips.append("<span style='color:#dc2626; font-weight:600;'>⚠️ Missing Resume</span>")
+
+        if jd_ready:
+            stat_chips.append(f"<span style='color:#059669; font-weight:600;'>✓ Job Description Ready ({live_jd_words} words)</span>")
+        else:
+            stat_chips.append("<span style='color:#dc2626; font-weight:600;'>⚠️ Missing Job Description</span>")
+
+        weights_summary = (
+            f"Weights: Skills {st.session_state.w_skills}% &bull; TF-IDF {st.session_state.w_tfidf}% &bull; "
+            f"Impact {st.session_state.w_impact}% &bull; Sections {st.session_state.w_sections}%"
+        )
+        
+        st.markdown(f"Status: {' &nbsp;|&nbsp; '.join(stat_chips)}", unsafe_allow_html=True)
+        st.caption(weights_summary)
+
+    with col_rev_btn:
+        run_analysis = st.button("🚀 Run Compatibility Analysis", type="primary", use_container_width=True)
+
+    if run_analysis:
+        if live_res_words == 0:
+            st.error("Please provide a resume in Step 1 before analyzing.")
+        elif live_jd_words == 0:
+            st.error("Please provide a job description in Step 2 before analyzing.")
+        else:
+            st.session_state.analysis_done = True
+
+
+# === STEP 4: RESULTS DASHBOARD ===
+st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+
+if not st.session_state.analysis_done or live_res_words == 0 or live_jd_words == 0:
+    # High-quality Empty State
+    st.markdown("""
+    <div class='empty-card'>
+        <div class='empty-icon'>🎯</div>
+        <h3 style='color:#0f172a; margin-top:0;'>Ready to Analyze Resume Compatibility</h3>
+        <p style='max-width:540px; margin:0.5rem auto 1.5rem auto; font-size:0.95rem; line-height:1.5;'>
+            Complete Steps 1 and 2 above with your candidate resume and target job description, then click 
+            <b>'Run Compatibility Analysis'</b> to generate your ATS scorecard, skill gap matrix, and optimization roadmap.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    c_empty_l, c_empty_mid, c_empty_r = st.columns([1, 1.2, 1])
+    with c_empty_mid:
+        if st.button("⚡ Load Senior AI Engineer Demo Preset", key="empty_load_preset", use_container_width=True):
+            loaded_res = load_sample_file("data/sample_resumes/alex_chen_data_scientist.txt")
+            loaded_jd = load_sample_file("data/sample_jds/ai_data_scientist_job_description.txt")
+            st.session_state.resume_text = loaded_res
+            st.session_state.ta_resume = loaded_res
+            st.session_state.jd_text = loaded_jd
+            st.session_state.ta_jd = loaded_jd
+            st.session_state.resume_filename = "alex_chen_data_scientist.txt (Preset 1)"
+            st.session_state.jd_filename = "ai_data_scientist_job_description.txt"
+            st.session_state.active_preset_name = "Senior AI Engineer (High Match)"
+            st.session_state._last_resume_file_id = None
+            st.session_state._last_jd_file_id = None
+            st.session_state.analysis_done = True
+            st.rerun()
+
+else:
+    # RUN REAL COMPATIBILITY ENGINE
     res_text = st.session_state.resume_text
     j_text = st.session_state.jd_text
 
@@ -257,12 +775,16 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
         ats_health = ats_analyzer.analyze_resume(res_text, sections, contacts)
 
         # 3. Matching & Similarity
-        # Normalize custom weights
-        total_weight = w_skills + w_tfidf + w_impact + w_sections
-        norm_w_skills = w_skills / total_weight
-        norm_w_tfidf = w_tfidf / total_weight
-        norm_w_impact = w_impact / total_weight
-        norm_w_sec = w_sections / total_weight
+        total_weight = (
+            st.session_state.w_skills + 
+            st.session_state.w_tfidf + 
+            st.session_state.w_impact + 
+            st.session_state.w_sections
+        )
+        norm_w_skills = st.session_state.w_skills / total_weight
+        norm_w_tfidf = st.session_state.w_tfidf / total_weight
+        norm_w_impact = st.session_state.w_impact / total_weight
+        norm_w_sec = st.session_state.w_sections / total_weight
 
         match_result = matcher.match(
             res_text, 
@@ -271,7 +793,7 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
             verb_impact_score=ats_health["verb_impact_score"]
         )
 
-        # Re-apply custom weights if customized
+        # Re-apply normalized user weights
         custom_overall = (
             (match_result["skill_coverage_score"] * norm_w_skills) +
             (match_result["tfidf_similarity"] * norm_w_tfidf) +
@@ -280,7 +802,7 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
         )
         match_result["overall_score"] = round(max(0.0, min(100.0, custom_overall)), 1)
         
-        # Update tier color and name based on custom score
+        # Update tier classification
         if match_result["overall_score"] >= 85:
             match_result["tier"] = "High Match (ATS Pass Tier)"
             match_result["tier_color"] = "#10b981"
@@ -297,13 +819,19 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
         # 4. Generate Recommendations
         recommendations = ats_analyzer.generate_recommendations(match_result, ats_health)
 
-        # Extract categorized skills for radar chart
+        # 5. Extract categorized skills for radar chart
         res_skills_data = skill_extractor.extract_skills(res_text)
         jd_skills_data = skill_extractor.extract_skills(j_text)
 
-    st.markdown("---")
+    # RESULTS DASHBOARD CONTAINER
+    st.markdown(
+        """<div class='stage-header' style='margin-top:1rem; margin-bottom:0.8rem;'>
+            <div class='stage-title'><span>📈</span> Step 4: ATS Compatibility Results Dashboard</div>
+        </div>""",
+        unsafe_allow_html=True
+    )
 
-    # TABS FOR NAVIGATION
+    # ALL 4 RESULT TABS PRESERVED
     tab_overview, tab_skills, tab_recs, tab_export = st.tabs([
         "📊 Compatibility Overview", 
         "🔍 Skill Gap Matrix", 
@@ -327,41 +855,41 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
             k1, k2 = st.columns(2)
             with k1:
                 st.markdown(
-                    f"""<div class='kpi-box' style='border-top:3px solid #3b82f6;'>
+                    f"""<div class='kpi-card' style='border-top:3px solid #3b82f6;'>
                         <div class='kpi-title'>Skill Keyword Coverage</div>
-                        <div class='kpi-metric' style='color:#3b82f6;'>{match_result['skill_coverage_score']}%</div>
-                        <span style='font-size:0.8rem; color:#64748b;'>{match_result['matched_skills_count']} of {match_result['total_jd_skills_count']} required skills matched</span>
+                        <div class='kpi-val' style='color:#3b82f6;'>{match_result['skill_coverage_score']}%</div>
+                        <div class='kpi-sub'>{match_result['matched_skills_count']} of {match_result['total_jd_skills_count']} required skills matched</div>
                     </div>""", 
                     unsafe_allow_html=True
                 )
             with k2:
                 st.markdown(
-                    f"""<div class='kpi-box' style='border-top:3px solid #8b5cf6;'>
+                    f"""<div class='kpi-card' style='border-top:3px solid #8b5cf6;'>
                         <div class='kpi-title'>Semantic TF-IDF Match</div>
-                        <div class='kpi-metric' style='color:#8b5cf6;'>{match_result['tfidf_similarity']}%</div>
-                        <span style='font-size:0.8rem; color:#64748b;'>Document vocabulary & n-gram overlap</span>
+                        <div class='kpi-val' style='color:#8b5cf6;'>{match_result['tfidf_similarity']}%</div>
+                        <div class='kpi-sub'>Document vocabulary & n-gram overlap</div>
                     </div>""", 
                     unsafe_allow_html=True
                 )
 
-            st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
             k3, k4 = st.columns(2)
             with k3:
                 st.markdown(
-                    f"""<div class='kpi-box' style='border-top:3px solid #10b981;'>
+                    f"""<div class='kpi-card' style='border-top:3px solid #10b981;'>
                         <div class='kpi-title'>Action Verbs & Impact</div>
-                        <div class='kpi-metric' style='color:#10b981;'>{ats_health['verb_impact_score']}%</div>
-                        <span style='font-size:0.8rem; color:#64748b;'>{ats_health['metric_count']} metrics, {ats_health['strong_verbs_count']} power verbs</span>
+                        <div class='kpi-val' style='color:#10b981;'>{ats_health['verb_impact_score']}%</div>
+                        <div class='kpi-sub'>{ats_health['metric_count']} metrics, {ats_health['strong_verbs_count']} power verbs</div>
                     </div>""", 
                     unsafe_allow_html=True
                 )
             with k4:
                 st.markdown(
-                    f"""<div class='kpi-box' style='border-top:3px solid #f59e0b;'>
+                    f"""<div class='kpi-card' style='border-top:3px solid #f59e0b;'>
                         <div class='kpi-title'>Section Completeness</div>
-                        <div class='kpi-metric' style='color:#f59e0b;'>{ats_health['section_score']}%</div>
-                        <span style='font-size:0.8rem; color:#64748b;'>{len(ats_health['sections_present'])} standard sections indexed</span>
+                        <div class='kpi-val' style='color:#f59e0b;'>{ats_health['section_score']}%</div>
+                        <div class='kpi-sub'>{len(ats_health['sections_present'])} standard sections indexed</div>
                     </div>""", 
                     unsafe_allow_html=True
                 )
@@ -442,7 +970,7 @@ if st.session_state.analysis_done and "resume_text" in st.session_state:
                 f"""<div class='rec-card'>
                     <div style='display:flex; justify-content:space-between; align-items:center;'>
                         <h4 style='margin:0; color:#0f172a; font-size:1.05rem;'>{rec['title']}</h4>
-                        <span class='badge' style='background:{badge_bg}; color:#ffffff;'>{rec['priority']} PRIORITY</span>
+                        <span style='background:{badge_bg}; color:#ffffff; font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:4px;'>{rec['priority']} PRIORITY</span>
                     </div>
                     <p style='color:#475569; font-size:0.92rem; margin:8px 0 10px 0;'>{rec['description']}</p>
                     <div style='background:#f0fdfa; border-radius:6px; padding:8px 12px; font-size:0.85rem; color:#0f766e;'>

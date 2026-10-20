@@ -3,7 +3,6 @@ setlocal
 
 echo ======================================================================
 echo    Starting AI-Powered Resume-Job Match Analyzer Dashboard
-echo    Day 4 - 90 Days 90 Projects Challenge
 echo ======================================================================
 
 if not exist .venv\Scripts\streamlit.exe (

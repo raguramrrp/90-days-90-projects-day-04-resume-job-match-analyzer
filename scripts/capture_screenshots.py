@@ -55,7 +55,7 @@ def take_static_screenshot(url: str, output_filename: str, width: int = 1280, he
         return False
 
 
-async def capture_cdp_screenshot(url: str, output_path: str, width: int = 1400, height: int = 900, wait_seconds: int = 6):
+async def capture_cdp_screenshot(url: str, output_path: str, width: int = 1400, height: int = 950, wait_seconds: int = 6):
     """Capture dynamic interactive dashboard view via Chrome DevTools Protocol."""
     chrome_proc = subprocess.Popen(
         [
@@ -115,7 +115,7 @@ def main():
     print(f"[*] Capturing HTML scorecard screenshot from {file_url}...")
     take_static_screenshot(file_url, "02_ats_scorecard_report.png", width=1280, height=1100)
 
-    # 2. Launch Streamlit on port 8507 and capture live dashboard
+    # 2. Launch Streamlit on port 8507 and capture live dashboard views
     python_exe = os.path.join(BASE_DIR, ".venv", "Scripts", "python.exe")
     port = 8507
     print(f"[*] Launching Streamlit on port {port}...")
@@ -128,9 +128,15 @@ def main():
     time.sleep(5)
 
     try:
+        # View 1: Workspace overview (Empty state ready for user)
         dash_shot = os.path.join(SCREENSHOTS_DIR, "01_streamlit_dashboard_overview.png")
-        print("[*] Capturing Streamlit dashboard overview via CDP...")
+        print("[*] Capturing Step-by-Step Workspace Overview...")
         asyncio.run(capture_cdp_screenshot(f"http://localhost:{port}", dash_shot, width=1400, height=950, wait_seconds=6))
+
+        # View 2: Active Results Dashboard with Preset 1 loaded and analyzed
+        results_shot = os.path.join(SCREENSHOTS_DIR, "03_results_dashboard_view.png")
+        print("[*] Capturing ATS Results Dashboard with Preset 1...")
+        asyncio.run(capture_cdp_screenshot(f"http://localhost:{port}/?preset=1", results_shot, width=1400, height=1100, wait_seconds=7))
     finally:
         st_proc.terminate()
         st_proc.wait()
